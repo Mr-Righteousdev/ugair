@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flight Timetable - Uganda Airlines</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #FFFFFF; --bg-soft: #F8F6F1; --bg-dark: #0D1B2A;
+      --accent-navy: #1B3A5C; --accent-gold: #C9933A; --text-primary: #1A1A1A;
+      --text-muted: #6B7280; --border: #E5E0D8;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; color: var(--text-primary); }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .section-title { text-align: center; margin-bottom: 40px; }
+    .section-title h2 { font-family: 'Cormorant Garamond', serif; font-size: 36px; color: var(--accent-navy); margin-bottom: 8px; }
+    nav { background: var(--bg-dark); padding: 16px 0; }
+    .nav-container { display: flex; justify-content: space-between; align-items: center; }
+    .nav-logo { display: flex; align-items: center; gap: 12px; font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 700; color: white; }
+    .logo-crane { width: 32px; height: 32px; background: var(--accent-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--bg-dark); font-size: 12px; }
+    .nav-links a { color: white; margin-right: 32px; text-decoration: none; }
+    main { padding: 120px 0; }
+    table { width: 100%; border-collapse: collapse; margin-top: 40px; }
+    th, td { padding: 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    th { background: var(--accent-navy); color: white; }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container nav-container">
+      <a href="index.html" class="nav-logo"><div class="logo-crane">UR</div>Uganda Airlines</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#destinations">Destinations</a>
+        <a href="timetable.html">Timetable</a>
+        <a href="status.html">Status</a>
+      </div>
+    </div>
+  </nav>
+  <main>
+    <div class="container">
+      <div class="section-title">
+        <h2>Flight Timetable</h2>
+        <p>Daily flight schedule from Entebbe</p>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Flight</th><th>Route</th><th>Departure</th><th>Arrival</th><th>Days</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>UR 101</td><td>EBB → NBO</td><td>07:30</td><td>08:50</td><td>Daily</td></tr>
+          <tr><td>UR 201</td><td>EBB → DAR</td><td>10:15</td><td>12:00</td><td>Daily</td></tr>
+          <tr><td>UR 305</td><td>EBB → FIH</td><td>14:00</td><td>17:30</td><td>Daily</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</body>
+</html>

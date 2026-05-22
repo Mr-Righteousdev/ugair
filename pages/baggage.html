@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baggage Policy - Uganda Airlines</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg-primary: #FFFFFF; --bg-soft: #F8F6F1; --bg-dark: #0D1B2A; --accent-navy: #1B3A5C; --accent-gold: #C9933A; --text-primary: #1A1A1A; --text-muted: #6B7280; --border: #E5E0D8; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; color: var(--text-primary); background: var(--bg-soft); }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    nav, main { padding: 16px 0; }
+    .nav-logo { display: flex; align-items: center; gap: 12px; font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 700; color: white; }
+    .logo-crane { width: 32px; height: 32px; background: var(--accent-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--bg-dark); font-size: 12px; }
+    .nav-links a { color: white; margin-right: 32px; text-decoration: none; }
+    .section-title h2 { font-family: 'Cormorant Garamond', serif; font-size: 36px; color: var(--accent-navy); text-align: center; margin: 40px 0 20px; }
+  </style>
+</head>
+<body>
+  <nav style="background: var(--bg-dark);">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+      <a href="index.html" class="nav-logo"><div class="logo-crane">UR</div>Uganda Airlines</a>
+      <div class="nav-links"><a href="index.html">Home</a><a href="baggage.html">Baggage</a></div>
+    </div>
+  </nav>
+  <main class="container">
+    <div class="section-title"><h2>Baggage Policy</h2></div>
+    <h3 style="color: var(--accent-navy); margin-bottom: 16px;">Carry-on Baggage</h3>
+    <p style="margin-bottom: 24px;">Passengers are allowed one cabin bag (55x40x20cm) and one personal item.</p>
+    <h3 style="color: var(--accent-navy); margin-bottom: 16px;">Checked Baggage</h3>
+    <ul style="margin-left: 20px; line-height: 1.8;">
+      <li>Economy: 23kg checked + 7kg cabin</li>
+      <li>Business: 32kg checked + 7kg cabin</li>
+    </ul>
+  </main>
+</body>
+</html>

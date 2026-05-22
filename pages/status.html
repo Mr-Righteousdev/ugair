@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flight Status - Uganda Airlines</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #FFFFFF; --bg-soft: #F8F6F1; --bg-dark: #0D1B2A;
+      --accent-navy: #1B3A5C; --accent-gold: #C9933A; --text-primary: #1A1A1A;
+      --text-muted: #6B7280; --border: #E5E0D8;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; color: var(--text-primary); }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .section-title { text-align: center; margin-bottom: 40px; }
+    .section-title h2 { font-family: 'Cormorant Garamond', serif; font-size: 36px; color: var(--accent-navy); margin-bottom: 8px; }
+    .section-title p { color: var(--text-muted); font-size: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .form-group label { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+    .form-group input { height: 52px; padding: 0 14px; border: 1px solid var(--border); border-radius: 6px; font-size: 16px; }
+    .search-btn { width: 100%; height: 52px; background: var(--accent-gold); color: var(--bg-dark); font-weight: 700; border-radius: 6px; }
+    nav { background: var(--bg-dark); padding: 16px 0; }
+    .nav-container { display: flex; justify-content: space-between; align-items: center; }
+    .nav-logo { display: flex; align-items: center; gap: 12px; font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 700; color: white; }
+    .logo-crane { width: 32px; height: 32px; background: var(--accent-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--bg-dark); font-size: 12px; }
+    .nav-links a { color: white; margin-right: 32px; text-decoration: none; }
+    main { padding: 120px 0; }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container nav-container">
+      <a href="index.html" class="nav-logo"><div class="logo-crane">UR</div>Uganda Airlines</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#destinations">Destinations</a>
+        <a href="index.html#checkin">Check-In</a>
+        <a href="status.html">Status</a>
+      </div>
+    </div>
+  </nav>
+  <main>
+    <div class="container">
+      <div class="section-title">
+        <h2>Flight Status</h2>
+        <p>Check real-time flight status and gate information</p>
+      </div>
+      <form style="max-width: 500px; margin: 0 auto;">
+        <div class="form-group">
+          <label for="statusFlight">Flight Number</label>
+          <input type="text" id="statusFlight" placeholder="e.g. UR101">
+        </div>
+        <div class="form-group">
+          <label for="statusDate">Date</label>
+          <input type="date" id="statusDate">
+        </div>
+        <button type="submit" class="search-btn">Check Status →</button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
