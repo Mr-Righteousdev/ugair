@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Destinations — Uganda Airlines</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #FFFFFF; --bg-soft: #F8F6F1; --bg-dark: #0D1B2A;
+      --accent-navy: #1B3A5C; --accent-gold: #C9933A; --accent-gold-l: #E8B86D;
+      --accent-green: #27AE60; --text-primary: #1A1A1A; --text-muted: #6B7280;
+      --text-light: #F8F6F1; --border: #E5E0D8;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; color: var(--text-primary); line-height: 1.6; overflow-x: hidden; }
+    h1, h2, h3 { font-family: 'Cormorant Garamond', serif; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; font-family: inherit; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .text-center { text-align: center; }
+    .btn-gold { padding: 10px 24px; background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-l)); color: var(--bg-dark); border-radius: 6px; font-weight: 700; font-size: 14px; transition: box-shadow 0.3s, transform 0.3s; display: inline-block; box-shadow: 0 2px 12px rgba(201, 147, 58, 0.25); }
+    .btn-gold:hover { box-shadow: 0 4px 20px rgba(201, 147, 58, 0.4); transform: translateY(-1px); }
+    .btn-outline { padding: 8px 20px; border: 1.5px solid var(--accent-gold); color: var(--accent-gold); border-radius: 6px; font-weight: 600; font-size: 14px; transition: all 0.3s; display: inline-block; }
+    .btn-outline:hover { background: var(--accent-gold); color: var(--bg-dark); }
+    .section-title { text-align: center; margin-bottom: 40px; }
+    .section-title h2 { font-size: 36px; color: var(--accent-navy); margin-bottom: 8px; }
+    .section-title p { color: var(--text-muted); font-size: 16px; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 18px 0; transition: background 0.4s cubic-bezier(0.22, 1, 0.36, 1), padding 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1); background: transparent; backdrop-filter: blur(10px); }
+    nav.scrolled { background: var(--bg-dark); padding: 12px 0; box-shadow: 0 4px 24px rgba(13, 27, 42, 0.2); }
+    .nav-container { display: flex; justify-content: space-between; align-items: center; }
+    .nav-logo { display: flex; align-items: center; gap: 14px; font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: var(--text-light); letter-spacing: 0.02em; }
+    .logo-crane { width: 38px; height: 38px; background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-l)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--bg-dark); font-size: 13px; box-shadow: 0 2px 8px rgba(201, 147, 58, 0.3); }
+    .nav-links { display: flex; gap: 4px; }
+    .nav-links a { color: rgba(255,255,255,0.85); font-weight: 500; font-size: 14px; padding: 8px 14px; position: relative; transition: color 0.3s; }
+    .nav-links a::after { content: ''; position: absolute; bottom: 2px; left: 14px; right: 14px; height: 2px; background: var(--accent-gold); transform: scaleX(0); border-radius: 1px; transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1); transform-origin: left; }
+    .nav-links a:hover, .nav-links a.active { color: #fff; }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+    .nav-actions { display: flex; gap: 12px; align-items: center; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; }
+    .hamburger span { width: 24px; height: 2px; background: var(--text-light); border-radius: 1px; transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s; transform-origin: center; }
+    .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-nav { display: flex; position: fixed; top: 0; right: 0; bottom: 0; width: 280px; background: var(--bg-dark); padding: 80px 32px 32px; z-index: 1001; flex-direction: column; gap: 8px; transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1); box-shadow: -4px 0 24px rgba(0,0,0,0.3); }
+    .mobile-nav.active { transform: translateX(0); }
+    .mobile-nav a { color: rgba(255,255,255,0.85); padding: 14px 0; font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .mobile-nav a:last-of-type { border-bottom: none; }
+    .mobile-nav .btn-outline { margin-top: 16px; text-align: center; }
+
+    .page-header { margin-top: 80px; padding: 60px 0 40px; background: linear-gradient(160deg, #0D1B2A 0%, #1B3A5C 100%); color: white; text-align: center; }
+    .page-header h1 { font-size: 42px; margin-bottom: 8px; }
+    .page-header p { color: rgba(255,255,255,0.8); }
+
+    .destinations-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; padding: 40px 0 80px; }
+    .dest-card-grid {
+      aspect-ratio: 16/9; border-radius: 12px; padding: 20px; color: white;
+      display: flex; flex-direction: column; justify-content: flex-end; cursor: pointer;
+      transition: transform 0.3s, border 0.3s; border: 2px solid transparent;
+    }
+    .dest-card-grid:hover { transform: scale(1.03); border-color: var(--accent-gold); }
+    .dest-card-grid h4 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+    .dest-card-grid p { font-size: 14px; opacity: 0.9; }
+    .dest-nairobi { background: linear-gradient(45deg, #1a472a 0%, #2d6a4f 100%); }
+    .dest-dar { background: linear-gradient(45deg, #1d3557 0%, #457b9d 100%); }
+    .dest-mombasa { background: linear-gradient(45deg, #0077b6 0%, #00b4d8 100%); }
+    .dest-juba { background: linear-gradient(45deg, #7b2d00 0%, #c46200 100%); }
+    .dest-bujumbura { background: linear-gradient(45deg, #2d6a4f 0%, #52b788 100%); }
+    .dest-kinshasa { background: linear-gradient(45deg, #4a1942 0%, #7b2d8b 100%); }
+    .dest-mogadishu { background: linear-gradient(45deg, #7b3f00 0%, #c47c00 100%); }
+    .dest-zanzibar { background: linear-gradient(45deg, #006494 0%, #00b4d8 100%); }
+    .dest-london { background: linear-gradient(45deg, #1B3A5C 0%, #2C5F8A 100%); }
+
+    .dest-detail { padding: 40px 0; border-top: 1px solid var(--border); }
+    .dest-detail-row { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin-bottom: 60px; }
+    .dest-detail-row.reverse { direction: rtl; }
+    .dest-detail-row.reverse > * { direction: ltr; }
+    .dest-detail-visual { aspect-ratio: 16/10; border-radius: 12px; padding: 24px; color: white; display: flex; flex-direction: column; justify-content: flex-end; }
+    .dest-detail-visual h3 { font-size: 28px; margin-bottom: 4px; }
+    .dest-detail-info h3 { font-size: 24px; color: var(--accent-navy); margin-bottom: 12px; }
+    .dest-detail-info p { color: var(--text-muted); margin-bottom: 8px; line-height: 1.7; }
+    .dest-detail-meta { display: flex; gap: 24px; margin-top: 16px; }
+    .dest-meta-item { text-align: center; }
+    .dest-meta-value { font-size: 20px; font-weight: 700; color: var(--accent-navy); }
+    .dest-meta-label { font-size: 12px; color: var(--text-muted); }
+
+    #footer { background: var(--bg-dark); color: var(--text-light); padding: 60px 0 0; }
+    .pre-footer { background: var(--accent-navy); text-align: center; padding: 24px; margin-bottom: 40px; border-radius: 12px; }
+    .pre-footer p { font-size: 18px; font-weight: 600; margin-bottom: 16px; }
+    .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-bottom: 40px; }
+    .footer-col h5 { color: var(--accent-gold); margin-bottom: 16px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: var(--text-light); opacity: 0.8; font-size: 14px; transition: opacity 0.2s; }
+    .footer-col a:hover { opacity: 1; }
+    .copyright { text-align: center; padding: 20px 0; border-top: 1px solid rgba(255,255,255,0.1); font-size: 13px; opacity: 0.6; }
+    .whatsapp-float { position: fixed; bottom: 24px; right: 24px; z-index: 9999; width: 60px; height: 60px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4); animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
+    .whatsapp-float svg { width: 32px; height: 32px; fill: white; }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-actions { display: none; }
+      .hamburger { display: flex; }
+      .destinations-grid { grid-template-columns: 1fr; }
+      .dest-detail-row { grid-template-columns: 1fr; }
+      .dest-detail-row.reverse { direction: ltr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .page-header h1 { font-size: 28px; }
+    }
+    @media (max-width: 1024px) {
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <nav id="navbar">
+    <div class="container nav-container">
+      <a href="../index.html" class="nav-logo"><div class="logo-crane">UR</div><span>Uganda Airlines</span></a>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="destinations.html" class="active">Destinations</a>
+        <a href="flights.html">Book a Flight</a>
+        <a href="manage.html">Manage Booking</a>
+        <a href="checkin.html">Check-In</a>
+        <a href="support.html">Support</a>
+      </div>
+      <div class="nav-actions">
+        <a href="support.html" class="btn-outline">Support</a>
+        <a href="manage.html" class="btn-outline">My Booking</a>
+        <a href="flights.html" class="btn-gold">Book Now</a>
+      </div>
+      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </nav>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="../index.html">Home</a>
+    <a href="destinations.html">Destinations</a>
+    <a href="flights.html">Book a Flight</a>
+    <a href="manage.html">Manage Booking</a>
+    <a href="checkin.html">Check-In</a>
+    <a href="support.html">Support</a>
+    <a href="support.html" class="btn-outline">Support</a>
+  </div>
+
+  <div class="page-header">
+    <div class="container">
+      <h1>Our Destinations</h1>
+      <p>Direct routes from Entebbe International Airport</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="destinations-grid">
+      <div class="dest-card-grid dest-nairobi" id="nairobi"><h4>Nairobi</h4><p>Kenya  From USD 189</p></div>
+      <div class="dest-card-grid dest-dar" id="dar"><h4>Dar es Salaam</h4><p>Tanzania  From USD 215</p></div>
+      <div class="dest-card-grid dest-mombasa" id="mombasa"><h4>Mombasa</h4><p>Kenya  From USD 230</p></div>
+      <div class="dest-card-grid dest-juba" id="juba"><h4>Juba</h4><p>South Sudan  From USD 260</p></div>
+      <div class="dest-card-grid dest-bujumbura" id="bujumbura"><h4>Bujumbura</h4><p>Burundi  From USD 245</p></div>
+      <div class="dest-card-grid dest-kinshasa" id="kinshasa"><h4>Kinshasa</h4><p>DR Congo  From USD 340</p></div>
+      <div class="dest-card-grid dest-mogadishu" id="mogadishu"><h4>Mogadishu</h4><p>Somalia  From USD 290</p></div>
+      <div class="dest-card-grid dest-zanzibar" id="zanzibar"><h4>Zanzibar</h4><p>Tanzania  From USD 225</p></div>
+      <div class="dest-card-grid dest-london" id="london"><h4>London</h4><p>United Kingdom  From USD 899</p></div>
+    </div>
+  </div>
+
+  <section style="background: var(--bg-soft); padding: 60px 0;">
+    <div class="container">
+      <div class="section-title">
+        <h2>Explore Our Routes</h2>
+        <p>Detailed information about each destination we serve</p>
+      </div>
+
+      <div class="dest-detail">
+        <div class="dest-detail-row" id="detail-nairobi">
+          <div class="dest-detail-visual dest-nairobi"><h3>Nairobi, Kenya</h3><p>1h 20m flight from Entebbe</p></div>
+          <div class="dest-detail-info">
+            <h3>Nairobi</h3>
+            <p>Kenya's vibrant capital and East Africa's economic hub. From the Nairobi National Park to world-class restaurants and shopping, Nairobi offers an unforgettable urban African experience.</p>
+            <div class="dest-detail-meta">
+              <div class="dest-meta-item"><div class="dest-meta-value">1h 20m</div><div class="dest-meta-label">Flight Time</div></div>
+              <div class="dest-meta-item"><div class="dest-meta-value">USD 189</div><div class="dest-meta-label">From (Economy)</div></div>
+              <div class="dest-meta-item"><div class="dest-meta-value">Daily</div><div class="dest-meta-label">Frequency</div></div>
+            </div>
+            <a href="flights.html" class="btn-gold" style="margin-top: 16px;">Book to Nairobi</a>
+          </div>
+        </div>
+
+        <div class="dest-detail-row reverse" id="detail-dar">
+          <div class="dest-detail-visual dest-dar"><h3>Dar es Salaam, Tanzania</h3><p>1h 45m flight from Entebbe</p></div>
+          <div class="dest-detail-info">
+            <h3>Dar es Salaam</h3>
+            <p>Tanzania's largest city and commercial capital, sitting on the shores of the Indian Ocean. A gateway to Zanzibar, Selous Game Reserve, and the southern safari circuit.</p>
+            <div class="dest-detail-meta">
+              <div class="dest-meta-item"><div class="dest-meta-value">1h 45m</div><div class="dest-meta-label">Flight Time</div></div>
+              <div class="dest-meta-item"><div class="dest-meta-value">USD 215</div><div class="dest-meta-label">From (Economy)</div></div>
+              <div class="dest-meta-item"><div class="dest-meta-value">Daily</div><div class="dest-meta-label">Frequency</div></div>
+            </div>
+            <a href="flights.html" class="btn-gold" style="margin-top: 16px;">Book to Dar es Salaam</a>
+          </div>
+        </div>
+
+        <div class="dest-detail-row" id="detail-mombasa">
+          <div class="dest-detail-visual dest-mombasa"><h3>Mombasa, Kenya</h3><p>1h 55m flight from Entebbe</p></div>
+          <div class="dest-detail-info">
+            <h3>Mombasa</h3>
+            <p>Kenya's coastal gem, known for pristine beaches, coral reefs, and historic Swahili architecture. The perfect East African beach getaway destination.</p>
+            <div class="dest-detail-meta">
+              <div class="dest-meta-item"><div class="dest-meta-value">1h 55m</div><div class="dest-meta-label">Flight Time</div></div>
+              <div class="dest-meta-item"><div class="dest-meta-value">USD 230</div><div class="dest-meta-label">From (Economy)</div></div>
+              <div class="dest-meta-item"><div class="dest-meta-value">Daily</div><div class="dest-meta-label">Frequency</div></div>
+            </div>
+            <a href="flights.html" class="btn-gold" style="margin-top: 16px;">Book to Mombasa</a>
+          </div>
+        </div>
+
+        <div class="dest-detail-row reverse" id="detail-juba">
+          <div class="dest-detail-visual dest-juba"><h3>Juba, South Sudan</h3><p>1h 30m flight from Entebbe</p></div>
+          <div class="dest-detail-info">
+            <h3>Juba</h3>
+            <p>The capital of the world's newest country, situated on the White Nile. A growing hub for humanitarian, diplomatic, and business travel.</p>
+            <div class="dest-detail-meta">
+              <div class="dest-meta-item"><div class="dest-meta-value">1h 30m</div><div class="dest-meta-label">Flight Time</div></div>
+              <div class="dest-meta-item"><div class="dest-meta-value">USD 260</div><div class="dest-meta-label">From (Economy)</div></div>
+              <div class="dest-meta-item"><div class="dest-meta-value">Daily</div><div class="dest-meta-label">Frequency</div></div>
+            </div>
+            <a href="flights.html" class="btn-gold" style="margin-top: 16px;">Book to Juba</a>
+          </div>
+        </div>
+
+        <div class="dest-detail-row" id="detail-bujumbura">
+          <div class="dest-detail-visual dest-bujumbura"><h3>Bujumbura, Burundi</h3><p>1h 40m flight from Entebbe</p></div>
+          <div class="dest-detail-info">
+            <h3>Bujumbura</h3>
+            <p>Burundi's capital on the shores of Lake Tanganyika. Known for its beaches, markets, and as a gateway to the chimpanzee tracking in Kibira National Park.</p>
+            <div class="dest-detail-meta">
+              <div class="dest-meta-item"><div class="dest-meta-value">1h 40m</div><div class="dest-meta-label">Flight Time</div></div>
+              <div class="dest-meta-item"><div class="dest-meta-value">USD 245</div><div class="dest-meta-label">From (Economy)</div></div>
+              <div class="dest-meta-item"><div class="dest-meta-value">Daily</div><div class="dest-meta-label">Frequency</div></div>
+            </div>
+            <a href="flights.html" class="btn-gold" style="margin-top: 16px;">Book to Bujumbura</a>
+          </div>
+        </div>
+
+        <div class="dest-detail-row reverse" id="detail-kinshasa">
+          <div class="dest-detail-visual dest-kinshasa"><h3>Kinshasa, DR Congo</h3><p>3h 30m flight from Entebbe</p></div>
+          <div class="dest-detail-info">
+            <h3>Kinshasa</h3>
+            <p>Africa's third-largest city and the capital of the Democratic Republic of Congo. A vibrant metropolis of music, art, and culture on the banks of the Congo River.</p>
+            <div class="dest-detail-meta">
+              <div class="dest-meta-item"><div class="dest-meta-value">3h 30m</div><div class="dest-meta-label">Flight Time</div></div>
+              <div class="dest-meta-item"><div class="dest-meta-value">USD 340</div><div class="dest-meta-label">From (Economy)</div></div>
+              <div class="dest-meta-item"><div class="dest-meta-value">Daily</div><div class="dest-meta-label">Frequency</div></div>
+            </div>
+            <a href="flights.html" class="btn-gold" style="margin-top: 16px;">Book to Kinshasa</a>
+          </div>
+        </div>
+
+        <div class="dest-detail-row" id="detail-mogadishu">
+          <div class="dest-detail-visual dest-mogadishu"><h3>Mogadishu, Somalia</h3><p>2h 10m flight from Entebbe</p></div>
+          <div class="dest-detail-info">
+            <h3>Mogadishu</h3>
+            <p>Somalia's historic capital city on the Indian Ocean coast. An emerging destination for humanitarian, development, and business travel in the Horn of Africa.</p>
+            <div class="dest-detail-meta">
+              <div class="dest-meta-item"><div class="dest-meta-value">2h 10m</div><div class="dest-meta-label">Flight Time</div></div>
+              <div class="dest-meta-item"><div class="dest-meta-value">USD 290</div><div class="dest-meta-label">From (Economy)</div></div>
+              <div class="dest-meta-item"><div class="dest-meta-value">Daily</div><div class="dest-meta-label">Frequency</div></div>
+            </div>
+            <a href="flights.html" class="btn-gold" style="margin-top: 16px;">Book to Mogadishu</a>
+          </div>
+        </div>
+
+        <div class="dest-detail-row reverse" id="detail-zanzibar">
+          <div class="dest-detail-visual dest-zanzibar"><h3>Zanzibar, Tanzania</h3><p>1h 50m flight from Entebbe</p></div>
+          <div class="dest-detail-info">
+            <h3>Zanzibar</h3>
+            <p>The Spice Island, a tropical paradise of white-sand beaches, turquoise waters, and Stone Town's historic labyrinth. The ultimate Indian Ocean island escape.</p>
+            <div class="dest-detail-meta">
+              <div class="dest-meta-item"><div class="dest-meta-value">1h 50m</div><div class="dest-meta-label">Flight Time</div></div>
+              <div class="dest-meta-item"><div class="dest-meta-value">USD 225</div><div class="dest-meta-label">From (Economy)</div></div>
+              <div class="dest-meta-item"><div class="dest-meta-value">Daily</div><div class="dest-meta-label">Frequency</div></div>
+            </div>
+            <a href="flights.html" class="btn-gold" style="margin-top: 16px;">Book to Zanzibar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="footer">
+    <div class="container">
+      <div class="pre-footer">
+        <p>Uganda's Youngest Fleet. Africa's Fastest-Growing Airline.</p>
+        <a href="flights.html" class="btn-gold">Book Your Flight →</a>
+      </div>
+      <div class="footer-grid">
+        <div class="footer-col"><h5>Brand</h5><ul><li><a href="#">About Us</a></li><li><a href="#">Careers</a></li><li><a href="#">Media Center</a></li></ul></div>
+        <div class="footer-col"><h5>Fly</h5><ul><li><a href="flights.html">Book a Flight</a></li><li><a href="checkin.html">Check In</a></li><li><a href="manage.html">Manage Booking</a></li><li><a href="status.html">Flight Status</a></li><li><a href="timetable.html">Timetable</a></li></ul></div>
+        <div class="footer-col"><h5>Information</h5><ul><li><a href="destinations.html">Destinations</a></li><li><a href="baggage.html">Baggage Policy</a></li><li><a href="onboard.html">Onboard Experience</a></li><li><a href="assistance.html">Special Assistance</a></li><li><a href="#">Customer Service Plan</a></li></ul></div>
+        <div class="footer-col"><h5>Contact</h5><ul><li><a href="tel:+256200406400">+256 200 406400</a></li><li><a href="mailto:reservations@ugandairlines.com">reservations@ugandairlines.com</a></li><li><a href="#">Entebbe International Airport</a></li><li><a href="#">Interline: Emirates, Qatar Airways</a></li></ul></div>
+      </div>
+      <div class="copyright">© 2025 Uganda National Airlines Company Limited. All Rights Reserved.</div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/256200406400?text=Hello%2C%20I%20need%20help%20with%20my%20Uganda%20Airlines%20booking" class="whatsapp-float"><svg viewBox="0 0 24 24"><path d="M12.04 2C6.34 2 2 6.48 2 12.32c0 2.37.86 4.55 2.33 6.29L2 22l4.92-.84c1.65.47 3.42.72 5.12.72 5.7 0 10.04-4.48 10.04-10.32S17.74 2 12.04 2zm5.25 14.25c-.25-.13-1.5-.75-1.73-.84-.23-.09-.4-.13-.57.13-.17.25-.65.84-.8.98-.16.16-.32.18-.59.06-.28-.14-1.13-.42-2.16-1.36-.8-.71-1.34-1.58-1.49-1.86-.16-.3-.02-.44.11-.57.13-.13.28-.33.42-.5.14-.16.18-.27.27-.46.09-.19.04-.36-.02-.5-.07-.14-.57-1.36-.78-1.87-.21-.5-.43-.43-.57-.43-.15 0-.31-.02-.48-.06-.17-.04-.36.06-.52.18-.16.12-.6.27-1.05.38-.44.11-.83.06-1.15-.03-.31-.09-.62-.31-.77-.52-.15-.21-.15-.41-.1-.61.05-.2.21-.58.45-.84l.65-.7c.22-.24.31-.44.31-.7 0-.26-.07-.51-.16-.74-.09-.22-.38-.46-.52-.46-.14 0-.3-.02-.44-.04-.14-.02-.3-.02-.44.06-.14.08-.52.22-.76.38-.24.16-.4.37-.5.61-.1.24-.06.48.05.71.11.23.27.45.42.67.15.22.3.44.45.66.11.22.23.45.36.67.13.22.26.44.39.66.13.22.27.45.41.67.14.22.28.44.42.66.14.22.29.44.43.67z"/></svg></a>
+
+  <script>
+    document.getElementById('hamburger').addEventListener('click', function() {
+      this.classList.toggle('active');
+      document.getElementById('mobileNav').classList.toggle('active');
+    });
+    window.addEventListener('scroll', function() {
+      var nav = document.getElementById('navbar');
+      nav.classList.toggle('scrolled', window.scrollY > 80);
+    });
+    document.querySelectorAll('.dest-card-grid').forEach(function(card) {
+      card.addEventListener('click', function() {
+        var id = this.id;
+        var target = document.getElementById('detail-' + id);
+        if(target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
